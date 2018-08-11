@@ -237,15 +237,10 @@ public class ClientActivity extends AppCompatActivity {
                                         publishProgress(droneSegment.code, altitude.estalt, altitude.vario);
                                         break;
                                     default:
-
-                                        throw new IllegalStateException("Im fucked");
+                                        break;
                                 }
 
-                                Thread.sleep(1500);
-
                             } catch (IOException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                         }
