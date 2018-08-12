@@ -15,7 +15,7 @@
         android:layout_marginEnd="45dp"
         android:layout_marginTop="8dp"
         android:onClick="startTelemetry"
-        android:text="Start Telemetry"
+        android:text="@string/start_telemetry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,7 +70,7 @@
         android:layout_marginEnd="45dp"
         android:layout_marginTop="4dp"
         android:onClick="stopTelemetry"
-        android:text="Stop Telemetry"
+        android:text="@string/stop_telemetry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startTelemetry" />
 
@@ -106,7 +106,7 @@
                 android:id="@+id/estaltV"
                 android:layout_width="26dp"
                 android:layout_height="wrap_content"
-                android:text="na" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/varioH"
@@ -118,7 +118,7 @@
                 android:id="@+id/varioV"
                 android:layout_width="27dp"
                 android:layout_height="wrap_content"
-                android:text="na" />
+                android:text="@string/empty_telemetry_value" />
         </TableRow>
 
         <TableRow
@@ -144,7 +144,7 @@
                 android:id="@+id/accxV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/accyH"
@@ -156,7 +156,7 @@
                 android:id="@+id/accyV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/acczH"
@@ -168,7 +168,7 @@
                 android:id="@+id/acczV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
         </TableRow>
 
         <TableRow
@@ -194,7 +194,7 @@
                 android:id="@+id/gyrxV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/gyryH"
@@ -206,7 +206,7 @@
                 android:id="@+id/gyryV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/girzH"
@@ -218,7 +218,7 @@
                 android:id="@+id/gyrzV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
         </TableRow>
 
         <TableRow
@@ -244,7 +244,7 @@
                 android:id="@+id/magxV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/magyH"
@@ -256,7 +256,7 @@
                 android:id="@+id/magyV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
 
             <TextView
                 android:id="@+id/magzH"
@@ -268,7 +268,7 @@
                 android:id="@+id/magzV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:text="@string/empty_telemetry_value" />
         </TableRow>
     </TableLayout>
 
@@ -302,7 +302,7 @@
                 android:id="@+id/throttleV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="na" />
+                android:text="@string/default_strength" />
         </TableRow>
 
         <TableRow
@@ -322,7 +322,7 @@
                 android:id="@+id/yawV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="na" />
+                android:text="@string/default_strength" />
         </TableRow>
 
         <TableRow
@@ -342,7 +342,7 @@
                 android:id="@+id/pitchV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="na" />
+                android:text="@string/default_strength" />
         </TableRow>
 
         <TableRow
@@ -362,7 +362,7 @@
                 android:id="@+id/rollV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="na" />
+                android:text="@string/default_strength" />
         </TableRow>
     </TableLayout>
 

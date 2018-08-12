@@ -4,4 +4,8 @@
     <string name="command_port">Command port</string>
     <string name="telemetry_port">Telemetry port</string>
     <string name="start_connection_btn">Start connection</string>
+    <string name="empty_telemetry_value" >0</string>
+    <string name="default_strength">1500</string>
+    <string name="stop_telemetry">Stop telemetry</string>
+    <string name="start_telemetry">Start telemetry</string>
 </resources>
