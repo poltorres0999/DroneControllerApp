@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientActivity">
+    android:background="#E0FFFF"
+    tools:context=".ClientActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <Button
         android:id="@+id/startTelemetry"
         android:layout_width="154dp"
         android:layout_height="53dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="startTelemetry"
         android:text="Start Telemetry"
         app:layout_constraintBottom_toTopOf="@+id/stopTelemetry"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -26,77 +31,80 @@
         android:layout_height="184dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
         android:visibility="visible"
-        app:JV_backgroundColor="#FF69B4"
-        app:JV_backgroundSizeRatio="98%"
-        app:JV_borderColor="#FF69B4"
+        app:JV_backgroundColor="@color/colorPrimaryDark"
+        app:JV_backgroundSizeRatio="95%"
+        app:JV_borderColor="@color/colorAccent"
         app:JV_borderWidth="4dp"
-        app:JV_buttonColor="#FF6E40"
+        app:JV_buttonColor="@color/colorAccent"
+        app:JV_buttonImage="@:drawable/divider_horizontal_bright"
         app:JV_buttonSizeRatio="17%"
         app:JV_fixedCenter="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/JoystickRight"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
 
     <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/JoystickRight"
         android:layout_width="193dp"
         android:layout_height="183dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         android:visibility="visible"
-        custom:JV_backgroundColor="#FF69B4"
-        custom:JV_backgroundSizeRatio="98%"
-        custom:JV_borderColor="#FF69B4"
+        custom:JV_backgroundColor="@color/colorPrimaryDark"
+        custom:JV_backgroundSizeRatio="95%"
+        custom:JV_borderColor="@color/colorAccent"
         custom:JV_borderWidth="4dp"
-        custom:JV_buttonColor="#FF6E40"
+        custom:JV_buttonColor="@color/colorAccent"
         custom:JV_buttonSizeRatio="15%"
         custom:JV_fixedCenter="false"
         custom:layout_constraintBottom_toBottomOf="parent"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintTop_toTopOf="parent"
-        custom:layout_constraintVertical_bias="1.0" />
+        custom:layout_constraintHorizontal_bias="0.75"
+        custom:layout_constraintStart_toEndOf="@+id/tableLayout"
+        custom:layout_constraintTop_toBottomOf="@+id/stopTelemetry"
+        custom:layout_constraintVertical_bias="0.6" />
 
     <Button
         android:id="@+id/stopTelemetry"
         android:layout_width="153dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:onClick="stopTelemetry"
         android:text="Stop Telemetry"
-        app:layout_constraintBottom_toTopOf="@+id/JoystickRight"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="61dp" />
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="507dp"
-        android:layout_height="89dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="275dp"
+        android:layout_height="77dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toStartOf="@+id/stopTelemetry"
+        app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/altitudeHeader"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="ALTITUDE: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -127,12 +135,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/accHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="ACC"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -176,12 +186,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/gyrHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="GYR"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -225,12 +237,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/magHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="MAG"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -274,27 +288,26 @@
     </TableLayout>
 
     <TableLayout
-        android:layout_width="122dp"
-        android:layout_height="82dp"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/tableLayout"
+        android:layout_width="129dp"
+        android:layout_height="81dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/JoystickRight"
-        app:layout_constraintHorizontal_bias="0.593"
-        app:layout_constraintStart_toEndOf="@+id/JoystickLeft"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
-        app:layout_constraintVertical_bias="0.27">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.763"
+        tools:layout_editor_absoluteX="232dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/throttleH"
                 android:layout_width="68dp"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="Throttle:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -307,12 +320,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/yawH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="Yaw:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -325,12 +340,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/pitchH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="Pitch:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -343,12 +360,14 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFFDD0">
 
             <TextView
                 android:id="@+id/rollH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#F8DE7E"
                 android:text="Roll:"
                 android:textAppearance="@style/TextAppearance.AppCompat" />
 
