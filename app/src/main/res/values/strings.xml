@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DroneController</string>
+    <string name="app_name">Drone Controller</string>
     <string name="ip_message">Drone device Ip</string>
     <string name="command_port">Command port</string>
     <string name="telemetry_port">Telemetry port</string>
