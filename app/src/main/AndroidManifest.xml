@@ -22,7 +22,8 @@
 
         <activity
             android:name=".ClientActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/ControllerTheme">
         </activity>
 
     </application>
