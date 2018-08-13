@@ -78,7 +78,13 @@ public class ClientActivity extends AppCompatActivity {
             rollV.setText(Short.toString(roll));
             pitchV.setText(Short.toString(pitch));
         });
-        rcThread.setName("Raul");
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         rcThread.start();
     }
 
