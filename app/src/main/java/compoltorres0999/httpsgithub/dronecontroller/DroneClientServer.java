@@ -84,7 +84,6 @@ public class DroneClientServer implements AutoCloseable {
 
     }
 
-
     public void startTelemetry() throws IOException {
         final DatagramPacket datagramPacket=this.generateDatagramPacket((short)120);
 
@@ -92,7 +91,7 @@ public class DroneClientServer implements AutoCloseable {
             this.datagramSocket.send(datagramPacket);
             this.datagramSocket.receive(datagramPacket);
 
-            if (new DroneSegment(datagramPacket.getData()).code == 122) {
+            if (new DroneSegment(datagramPacket.getData()).code == 121) {
                 this.telemetryStarted = true;
                 this.telemetryThread.start();
             }
@@ -100,7 +99,7 @@ public class DroneClientServer implements AutoCloseable {
     }
 
     public void stopTelemetry() throws IOException{
-        final DatagramPacket datagramPacket=this.generateDatagramPacket((short)121);
+        final DatagramPacket datagramPacket=this.generateDatagramPacket((short)122);
         this.datagramSocket.send(datagramPacket);
     }
 

@@ -59,9 +59,6 @@ public class ClientActivity extends AppCompatActivity {
         TextView rollV = findViewById(R.id.rollV);
 
         //Creates the AsyncTask to handle telemetry execution.
-        this.telemetryTask = new TelemetryTask(client);
-        this.stopTelemetryTask = new StopTelemetryTask();
-
 
         //Creates right and left joysticks and defines it's behaviour.
 
@@ -88,12 +85,21 @@ public class ClientActivity extends AppCompatActivity {
     public void startTelemetry (View view) throws IOException {
 
         if (!telemetryStarted) {
-            this.telemetryTask.execute();
+            this.telemetryTask = new TelemetryTask(client);
+            this.telemetryTask.execute(); 
         }
     }
 
-    public void stopTelemetry (View view) {
-        this.stopTelemetryTask.execute();
+    public void stopTelemetry (View view) throws InterruptedException {
+
+        if (telemetryStarted) {
+            this.stopTelemetryTask = new StopTelemetryTask();
+            this.telemetryTask.cancel(true);
+            this.stopTelemetryTask.execute();
+            telemetryStarted = false;
+
+        }
+
     }
 
     public void arm (View view) throws IOException {
@@ -208,48 +214,53 @@ public class ClientActivity extends AppCompatActivity {
 
             final DatagramPacket datagramPacket = client.generateDatagramPacket((short) 120);
 
-            if (!telemetryStarted) {
-                try {
-                    client.datagramSocket.send(datagramPacket);
-                    client.datagramSocket.receive(datagramPacket);
-                    if (new DroneClientServer.DroneSegment(datagramPacket.getData()).code == 121) {
-                        telemetryStarted = true;
+            try {
+                client.datagramSocket.send(datagramPacket);
+                client.datagramSocket.receive(datagramPacket);
+                if (new DroneClientServer.DroneSegment(datagramPacket.getData()).code == 121) {
+                    telemetryStarted = true;
 
-                        while (true){
-                            final DatagramPacket datagramPacketResponse=new DatagramPacket(new byte[40],40);
-                            try {
-                                client.datagramSocket.receive(datagramPacketResponse);
-                                final DroneClientServer.DroneSegment droneSegment=new DroneClientServer.DroneSegment(datagramPacketResponse.getData());
+                    while (true) {
+                        final DatagramPacket datagramPacketResponse=new DatagramPacket(new byte[40],40);
+                        try {
 
-                                switch (droneSegment.code) {
-                                    case 102:
+                            if (isCancelled()) break;
 
-                                        RawImu raw = new RawImu(droneSegment.payload);
+                            client.datagramSocket.receive(datagramPacketResponse);
+                            final DroneClientServer.DroneSegment droneSegment=new
+                                    DroneClientServer.DroneSegment(datagramPacketResponse.getData());
 
-                                        publishProgress(droneSegment.code, raw.accx, raw.accy,
-                                                raw.accz, raw.gyrx, raw.gyry, raw.gyrz, raw.magx, raw.magy, raw.magz);
-                                        break;
+                            switch (droneSegment.code) {
+                                case 102:
 
-                                    case 109:
-                                        Altitude altitude
-                                                = new Altitude(droneSegment.payload);
-                                        publishProgress(droneSegment.code, altitude.estalt, altitude.vario);
-                                        break;
-                                    default:
-                                        break;
-                                }
+                                    RawImu raw = new RawImu(droneSegment.payload);
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                    publishProgress(droneSegment.code, raw.accx, raw.accy,
+                                            raw.accz, raw.gyrx, raw.gyry, raw.gyrz, raw.magx, raw.magy, raw.magz);
+                                    break;
+
+                                case 109:
+                                    Altitude altitude
+                                            = new Altitude(droneSegment.payload);
+                                    publishProgress(droneSegment.code, altitude.estalt, altitude.vario);
+                                    break;
+                                default:
+                                    break;
                             }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-
+                    return null;
                 }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
             }
+
             return null;
         }
 
@@ -332,11 +343,6 @@ public class ClientActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            if (telemetryTask.isCancelled() == false ) {
-                telemetryTask.cancel(true);
-            }
-
             return null;
         }
 
