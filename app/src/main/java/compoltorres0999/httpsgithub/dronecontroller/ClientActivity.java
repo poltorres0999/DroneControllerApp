@@ -86,7 +86,7 @@ public class ClientActivity extends AppCompatActivity {
 
         if (!telemetryStarted) {
             this.telemetryTask = new TelemetryTask(client);
-            this.telemetryTask.execute(); 
+            this.telemetryTask.execute();
         }
     }
 
