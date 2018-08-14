@@ -226,8 +226,8 @@ public class ClientActivity extends AppCompatActivity {
             final DatagramPacket datagramPacket = client.generateDatagramPacket((short) 120);
 
             try {
-                client.datagramSocket.send(datagramPacket);
-                client.datagramSocket.receive(datagramPacket);
+                client.getDatagramSocket().send(datagramPacket);
+                client.getDatagramSocket().receive(datagramPacket);
                 if (new DroneClientServer.DroneSegment(datagramPacket.getData()).code == 121) {
                     telemetryStarted = true;
 
@@ -237,7 +237,7 @@ public class ClientActivity extends AppCompatActivity {
 
                             if (isCancelled()) break;
 
-                            client.datagramSocket.receive(datagramPacketResponse);
+                            client.getDatagramSocket().receive(datagramPacketResponse);
                             final DroneClientServer.DroneSegment droneSegment=new
                                     DroneClientServer.DroneSegment(datagramPacketResponse.getData());
 
@@ -290,7 +290,7 @@ public class ClientActivity extends AppCompatActivity {
 
             }
         }
-        
+
         /* Not Working yet
         private void setTelemetryCallback () {
 
@@ -300,9 +300,9 @@ public class ClientActivity extends AppCompatActivity {
                 publishProgress(data);
 
             });
-        }
+        }*/
     }
-    */
+
 
     public class StartConnectionTask extends AsyncTask<Context, Void, Void> {
 

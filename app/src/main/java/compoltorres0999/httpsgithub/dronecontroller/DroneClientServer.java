@@ -13,7 +13,7 @@ import java.nio.ShortBuffer;
 
 public class DroneClientServer implements AutoCloseable {
 
-    public final DatagramSocket datagramSocket;
+    private final DatagramSocket datagramSocket;
     private final InetSocketAddress inetSocketAddress;
     private final Thread telemetryThread = new Thread(this::onTelemetryThreadRun);
     private boolean telemetryStarted;
@@ -136,6 +136,10 @@ public class DroneClientServer implements AutoCloseable {
         shortBuffer.put(payload);
         final byte[] buffer=byteBuffer.array();
         return new DatagramPacket(buffer,buffer.length);
+    }
+
+    public DatagramSocket getDatagramSocket() {
+        return datagramSocket;
     }
 
     public static class DroneSegment {
