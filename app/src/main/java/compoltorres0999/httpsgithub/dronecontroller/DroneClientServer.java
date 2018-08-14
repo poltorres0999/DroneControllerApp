@@ -23,7 +23,7 @@ public class DroneClientServer implements AutoCloseable {
     public DroneClientServer(final InetSocketAddress inetSocketAddress){
         try {
             this.datagramSocket=new DatagramSocket();
-            this.datagramSocket.setSoTimeout(1000);
+            this.datagramSocket.setSoTimeout(2000);
             this.telemetryStarted = false;
         } catch (SocketException e) {
             throw new RuntimeException(e);

@@ -1,9 +1,15 @@
 package compoltorres0999.httpsgithub.dronecontroller;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +19,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetSocketAddress;
+import java.net.SocketTimeoutException;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
@@ -27,6 +34,7 @@ public class ClientActivity extends AppCompatActivity {
     private StopTelemetryTask stopTelemetryTask;
     private Thread rcThread  = new Thread(this::onRcThreadRun);
     private static boolean telemetryStarted = false;
+    private ConnectionFailedDialog connectionFailedDialog;
 
     private static short roll;
     private static short pitch;
@@ -57,8 +65,6 @@ public class ClientActivity extends AppCompatActivity {
         TextView yawV = findViewById(R.id.yawV);
         TextView pitchV = findViewById(R.id.pitchV);
         TextView rollV = findViewById(R.id.rollV);
-
-        //Creates the AsyncTask to handle telemetry execution.
 
         //Creates right and left joysticks and defines it's behaviour.
 
@@ -103,7 +109,6 @@ public class ClientActivity extends AppCompatActivity {
             this.telemetryTask.cancel(true);
             this.stopTelemetryTask.execute();
             telemetryStarted = false;
-
         }
 
     }
@@ -333,9 +338,16 @@ public class ClientActivity extends AppCompatActivity {
         protected Void doInBackground(Context... contexts) {
             try {
                 client.start();
+            } catch (SocketTimeoutException e) {
+                connectionFailedDialog = new ConnectionFailedDialog();
+                connectionFailedDialog.show(getSupportFragmentManager(), "failedToConnect");
+            } catch (RuntimeException e) {
+                connectionFailedDialog = new ConnectionFailedDialog();
+                connectionFailedDialog.show(getSupportFragmentManager(), "failedToConnect");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             return null;
         }
     }
@@ -350,6 +362,26 @@ public class ClientActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return null;
+        }
+
+    }
+
+    @SuppressLint("ValidFragment")
+    public static class ConnectionFailedDialog extends DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.connection_failed);
+
+            builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    getActivity().finish();
+                }
+            });
+
+            return builder.create();
         }
 
     }
