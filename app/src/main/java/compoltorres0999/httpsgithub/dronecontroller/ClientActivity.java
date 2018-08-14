@@ -241,23 +241,9 @@ public class ClientActivity extends AppCompatActivity {
                             final DroneClientServer.DroneSegment droneSegment=new
                                     DroneClientServer.DroneSegment(datagramPacketResponse.getData());
 
-                            switch (droneSegment.code) {
-                                case 102:
+                            Short[] data = DroneSegmentToShort(droneSegment.code, droneSegment.payload);
 
-                                    RawImu raw = new RawImu(droneSegment.payload);
-
-                                    publishProgress(droneSegment.code, raw.accx, raw.accy,
-                                            raw.accz, raw.gyrx, raw.gyry, raw.gyrz, raw.magx, raw.magy, raw.magz);
-                                    break;
-
-                                case 109:
-                                    Altitude altitude
-                                            = new Altitude(droneSegment.payload);
-                                    publishProgress(droneSegment.code, altitude.estalt, altitude.vario);
-                                    break;
-                                default:
-                                    break;
-                            }
+                            publishProgress(data);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -276,7 +262,7 @@ public class ClientActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onProgressUpdate(Short... values) {
+        protected void onProgressUpdate(Short[] values) {
 
             switch (values[0]) {
                 case 102:
@@ -304,33 +290,19 @@ public class ClientActivity extends AppCompatActivity {
 
             }
         }
-
+        
+        /* Not Working yet
         private void setTelemetryCallback () {
 
-            this.client.setOnTelemetryCallback((telemetryDatagramPacket) -> {
-                switch (telemetryDatagramPacket.code) {
-                    case 102:
+            this.client.setOnTelemetryCallback((droneSegment) -> {
 
-                        RawImu raw = new RawImu(telemetryDatagramPacket.payload);
-
-                        publishProgress(telemetryDatagramPacket.code, raw.accx, raw.accy,
-                                raw.accz, raw.gyrx, raw.gyry, raw.gyrz, raw.magx, raw.magy, raw.magz);
-                        break;
-
-                    case 109:
-                        Altitude altitude
-                                = new Altitude(telemetryDatagramPacket.payload);
-                        publishProgress(telemetryDatagramPacket.code, altitude.estalt, altitude.vario);
-                        break;
-                    default:
-
-                        throw new IllegalStateException("Im fucked");
-                }
-                //More case's can be added depending the capabilities of the FC.
+                Short[] data = DroneSegmentToShort(droneSegment.code, droneSegment.payload);
+                publishProgress(data);
 
             });
         }
     }
+    */
 
     public class StartConnectionTask extends AsyncTask<Context, Void, Void> {
 
@@ -384,5 +356,16 @@ public class ClientActivity extends AppCompatActivity {
             return builder.create();
         }
 
+    }
+
+    private Short[] DroneSegmentToShort (short code, short[] payload) {
+
+        Short[] data = new Short[1 + payload.length];
+        data[0] = code;
+        for (int i = 1; i < payload.length+1; i++ ) {
+            data[i] = payload[i-1];
+        }
+
+        return data;
     }
 }
